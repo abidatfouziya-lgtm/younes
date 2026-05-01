@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coin Carrière — Recrutement Immobilier</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C5973A;
+    --gold-light: #E8C97A;
+    --gold-dark: #8A6520;
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E44;
+    --navy-light: #2A4060;
+    --cream: #FAF7F2;
+    --cream-mid: #F2EDE4;
+    --white: #FFFFFF;
+    --text-dark: #0D1B2A;
+    --text-mid: #3A4A5C;
+    --text-light: #6B7A8D;
+    --border: rgba(197,151,58,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(13,27,42,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(197,151,58,0.2);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 600; font-size: 0.875rem;
+    padding: 0.55rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+    padding: 8rem 2rem 5rem;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 70% 50%, rgba(197,151,58,0.08) 0%, transparent 60%),
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px);
+    pointer-events: none;
+  }
+  .hero-grid-line {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 42%;
+    border-left: 1px solid rgba(197,151,58,0.15);
+    background: linear-gradient(135deg, transparent 40%, rgba(197,151,58,0.04) 100%);
+    pointer-events: none;
+  }
+  .hero-content {
+    max-width: 680px; position: relative; z-index: 2;
+    animation: fadeUp 0.9s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(197,151,58,0.12);
+    border: 1px solid rgba(197,151,58,0.3);
+    color: var(--gold-light);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+    position: relative;
+  }
+  .hero-subtitle {
+    font-size: 1.15rem; font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+  }
+  .hero-subtitle strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+  .hero-cta-group {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700; font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 4px 24px rgba(197,151,58,0.35);
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem; font-weight: 400;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost::after { content: '→'; }
+  .hero-trust {
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem; color: rgba(255,255,255,0.5);
+  }
+  .trust-item .icon {
+    width: 16px; height: 16px;
+    background: rgba(197,151,58,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .trust-icon-check {
+    width: 8px; height: 8px;
+    border-right: 1.5px solid var(--gold);
+    border-bottom: 1.5px solid var(--gold);
+    transform: rotate(45deg) translate(-1px,-1px);
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--cream-mid);
+    padding: 2rem;
+    display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .stat-number span { color: var(--gold); }
+  .stat-label { font-size: 0.82rem; color: var(--text-light); font-weight: 400; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .section-tag {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .section-lead {
+    font-size: 1.05rem; color: var(--text-mid);
+    line-height: 1.75; max-width: 560px;
+  }
+
+  /* ── PAIN POINTS ── */
+  .pain-section { background: var(--cream-mid); }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .pain-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .pain-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .pain-card-accent {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+  }
+  .pain-icon {
+    width: 48px; height: 48px;
+    background: rgba(197,151,58,0.08);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .pain-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .pain-card p { font-size: 0.92rem; color: var(--text-mid); line-height: 1.7; }
+
+  /* ── SOLUTION ── */
+  .solution-section { background: var(--white); }
+  .solution-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3.5rem;
+  }
+  @media (max-width: 768px) { .solution-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+  .solution-list { list-style: none; }
+  .solution-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--cream-mid);
+  }
+  .solution-list li:last-child { border-bottom: none; }
+  .solution-check {
+    width: 24px; height: 24px; flex-shrink: 0;
+    background: rgba(197,151,58,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .solution-check::after {
+    content: '';
+    width: 8px; height: 5px;
+    border-left: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(-45deg) translate(1px,-1px);
+  }
+  .solution-list li strong {
+    display: block; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem;
+  }
+  .solution-list li span { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+  .solution-visual {
+    background: var(--navy);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .solution-visual::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(197,151,58,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+  .sol-metric {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .sol-metric:last-child { margin-bottom: 0; }
+  .sol-metric-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-bottom: 0.35rem; }
+  .sol-metric-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--white);
+  }
+  .sol-metric-value small { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--gold); margin-left: 8px; font-weight: 500; }
+
+  /* ── BENEFITS ── */
+  .benefits-section { background: var(--cream); }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .benefit-card {
+    text-align: center; padding: 2.5rem 1.5rem;
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid rgba(197,151,58,0.12);
+    transition: transform 0.25s;
+  }
+  .benefit-card:hover { transform: translateY(-4px); }
+  .benefit-icon-wrap {
+    width: 64px; height: 64px; margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, rgba(197,151,58,0.1), rgba(197,151,58,0.03));
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .benefit-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 0.6rem;
+  }
+  .benefit-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.65; }
+
+  /* SVG icons */
+  svg.ic { display: block; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  .how-section::before {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(197,151,58,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .how-section .section-title { color: var(--white); }
+  .how-section .section-lead { color: rgba(255,255,255,0.6); }
+  .steps-row {
+    display: flex; gap: 0; margin-top: 4rem; position: relative;
+    flex-wrap: wrap;
+  }
+  .step {
+    flex: 1; min-width: 200px;
+    text-align: center; padding: 0 1.5rem;
+    position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute; top: 36px; left: calc(50% + 40px); right: calc(-50% + 40px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .step-number {
+    width: 72px; height: 72px; border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--gold);
+    background: rgba(197,151,58,0.08);
+    position: relative; z-index: 1;
+  }
+  .step h3 {
+    font-weight: 600; font-size: 1.05rem; color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+  .step p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { background: var(--white); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .testimonial-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(197,151,58,0.1);
+    position: relative;
+  }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; line-height: 0.8;
+    color: var(--gold); opacity: 0.3;
+    position: absolute; top: 1.2rem; left: 1.5rem;
+  }
+  .testimonial-text {
+    font-size: 0.95rem; color: var(--text-mid);
+    line-height: 1.75; margin-bottom: 1.5rem;
+    padding-top: 1.5rem; position: relative; z-index: 1;
+    font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem; color: var(--gold);
+    flex-shrink: 0;
+  }
+  .author-name { font-weight: 600; font-size: 0.88rem; color: var(--navy); }
+  .author-role { font-size: 0.78rem; color: var(--text-light); }
+  .stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 0.25rem; }
+
+  /* ── OFFER ── */
+  .offer-section { background: var(--cream-mid); }
+  .offer-card {
+    background: var(--white);
+    border-radius: 24px;
+    border: 1px solid rgba(197,151,58,0.2);
+    padding: 4rem 3rem;
+    text-align: center;
+    max-width: 720px; margin: 0 auto;
+    position: relative; overflow: hidden;
+  }
+  .offer-card::before {
+    content: 'OFFRE DE LANCEMENT';
+    position: absolute; top: 1.5rem; left: 50%; transform: translateX(-50%);
+    background: rgba(197,151,58,0.12);
+    color: var(--gold-dark);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+    padding: 0.3rem 1rem; border-radius: 100px;
+    border: 1px solid rgba(197,151,58,0.25);
+  }
+  .offer-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem; font-weight: 900; color: var(--navy);
+    line-height: 1; margin: 2.5rem 0 0.25rem;
+  }
+  .offer-price sup { font-size: 1.5rem; vertical-align: super; color: var(--gold); }
+  .offer-price-label { font-size: 0.88rem; color: var(--text-light); margin-bottom: 2rem; }
+  .offer-features { list-style: none; margin-bottom: 2.5rem; display: inline-block; text-align: left; }
+  .offer-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.95rem; color: var(--text-mid);
+    padding: 0.4rem 0;
+  }
+  .offer-features li::before {
+    content: '';
+    width: 18px; height: 18px; flex-shrink: 0;
+    background: rgba(197,151,58,0.12);
+    border-radius: 50%;
+    border: 1px solid rgba(197,151,58,0.3);
+    display: inline-flex; align-items: center; justify-content: center;
+    background-image: url("data:image/svg+xml,%3Csvg width='8' height='6' viewBox='0 0 8 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3l2 2 4-4' stroke='%23C5973A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center;
+  }
+  .offer-note { font-size: 0.8rem; color: var(--text-light); margin-top: 1rem; }
+
+  /* ── FINAL CTA ── */
+  .final-cta-section {
+    background: var(--navy);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .final-cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(197,151,58,0.1) 0%, transparent 70%);
+  }
+  .final-cta-section .section-title { color: var(--white); }
+  .final-cta-section p {
+    color: rgba(255,255,255,0.6); font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.7;
+  }
+  .cta-urgency {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(197,151,58,0.12);
+    border: 1px solid rgba(197,151,58,0.25);
+    color: var(--gold-light); font-size: 0.82rem; font-weight: 500;
+    padding: 0.4rem 1rem; border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+  .pulse-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #08121D;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.3);
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .steps-row { flex-direction: column; gap: 2rem; }
+    .step:not(:last-child)::after { display: none; }
+    .stats-bar { gap: 2rem; }
+    .offer-card { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Coin<span>Carrière</span></div>
+  <a href="#offre" class="nav-cta">Publier une offre</a>
+</nav>
+
+<!-- ───── HERO ───── -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-line"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Plateforme Recrutement Immobilier</div>
+    <h1>Vous peinez à recruter le bon<br><em>profil immobilier&nbsp;?</em></h1>
+    <p class="hero-subtitle">
+      Coin Carrière connecte les agences et promoteurs immobiliers avec des candidats
+      <strong>qualifiés, motivés et disponibles</strong> — en quelques heures, pas en semaines.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#offre" class="btn-primary">Publier une offre gratuitement</a>
+      <a href="#comment" class="btn-ghost">Voir comment ça marche</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <div class="icon"><div class="trust-icon-check"></div></div>
+        Rapide — 48h max
+      </div>
+      <div class="trust-item">
+        <div class="icon"><div class="trust-icon-check"></div></div>
+        Candidats qualifiés immobilier
+      </div>
+      <div class="trust-item">
+        <div class="icon"><div class="trust-icon-check"></div></div>
+        Sans engagement
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">3<span>200+</span></div>
+    <div class="stat-label">Candidats actifs</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number"><span>48</span>h</div>
+    <div class="stat-label">Délai moyen de réponse</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number"><span>94</span>%</div>
+    <div class="stat-label">Agences satisfaites</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">850<span>+</span></div>
+    <div class="stat-label">Recrutements réalisés</div>
+  </div>
+</div>
+
+<!-- ───── PAIN POINTS ───── -->
+<section class="pain-section">
+  <div class="container">
+    <div class="section-tag">Le problème</div>
+    <h2 class="section-title">Recruter dans l'immobilier,<br>un vrai parcours du combattant</h2>
+    <p class="section-lead">Les plateformes généralistes ne comprennent pas votre métier. Résultat : des candidatures inadaptées, du temps perdu, et des postes vacants qui coûtent cher.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-card-accent"></div>
+        <div class="pain-icon">
+          <svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="#C5973A" stroke-width="1.5"/>
+            <path d="M12 7v5l3 3" stroke="#C5973A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Des semaines de délai</h3>
+        <p>Publier sur les jobboards classiques et attendre… Pendant ce temps, votre agence tourne à plein régime sans renfort. Chaque jour sans commercial coûte des mandats perdus.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-accent"></div>
+        <div class="pain-icon">
+          <svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#C5973A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="9" cy="7" r="4" stroke="#C5973A" stroke-width="1.5"/>
+            <line x1="19" y1="8" x2="23" y2="12" stroke="#C5973A" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="23" y1="8" x2="19" y2="12" stroke="#C5973A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Profils non qualifiés</h3>
+        <p>Vous recevez des dizaines de CV hors sujet — des candidats sans expérience en immobilier, sans connaissance du marché, ni de la réglementation en vigueur.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-accent"></div>
+        <div class="pain-icon">
+          <svg class="ic" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="4" width="18" height="16" rx="2" stroke="#C5973A" stroke-width="1.5"/>
+            <path d="M8 4V2M16 4V2M3 9h18" stroke="#C5973A" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M8 13h4M8 16h8" stroke="#C5973A" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Trop de temps passé à trier</h3>
+        <p>Trier les candidatures, mener des entretiens infructueux, recommencer… Le recrutement mobilise votre énergie au détriment de votre cœur de métier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── SOLUTION ───── -->
+<section class="solution-section">
+  <div class="container">
+    <div class="section-tag">La solution</div>
+    <h2 class="section-title">Coin Carrière — Le recrutement<br>pensé pour l'immobilier</h2>
+    <div class="solution-layout">
+      <div>
+        <p class="section-lead" style="margin-bottom: 2.5rem;">Une plateforme dédiée à 100% aux métiers de l'immobilier. Pas de bruit, que du signal : des candidats qui connaissent votre secteur et cherchent activement.</p>
+        <ul class="solution-list">
+          <li>
+            <div class="solution-check"></div>
+            <div><strong>Base de talents exclusivement immobilier</strong><span>Négociateurs, commerciaux, assistants, gestionnaires — tous spécialisés dans votre domaine.</span></div>
+          </li>
+          <li>
+            <div class="solution-check"></div>
+            <div><strong>Publication d'offre en 5 minutes</strong><span>Formulaire simple et guidé, votre annonce est en ligne immédiatement. Zéro friction.</span></div>
+          </li>
+          <li>
+            <div class="solution-check"></div>
+            <div><strong>Matching intelligent automatique</strong><span>Notre algorithme envoie votre offre aux candidats les plus pertinents selon leur profil et localisation.</span></div>
+          </li>
+          <li>
+            <div class="solution-check"></div>
+            <div><strong>Premiers CV en moins de 48h</strong><span>Arrêtez d'attendre. Les candidats intéressés postulent directement et vous êtes alerté en temps réel.</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="solution-visual">
+        <div class="sol-metric">
+          <div class="sol-metric-label">Délai moyen jusqu'au premier CV</div>
+          <div class="sol-metric-value">48h <small>▼ vs. 3 semaines ailleurs</small></div>
+        </div>
+        <div class="sol-metric">
+          <div class="sol-metric-label">Pertinence des candidatures</div>
+          <div class="sol-metric-value">91% <small>de profils ciblés immobilier</small></div>
+        </div>
+        <div class="sol-metric">
+          <div class="sol-metric-label">Taux de recrutement réussi</div>
+          <div class="sol-metric-value">78% <small>dès la 1ère publication</small></div>
+        </div>
+        <div style="margin-top: 1.5rem; padding: 1rem; border: 1px dashed rgba(197,151,58,0.3); border-radius: 10px; text-align: center;">
+          <div style="font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem;">Essai gratuit — sans CB</div>
+          <a href="#offre" class="btn-primary" style="display: inline-block; font-size: 0.9rem; padding: 0.7rem 1.5rem;">Commencer maintenant</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── BENEFITS ───── -->
+<section class="benefits-section">
+  <div class="container">
+    <div class="section-tag">Vos avantages</div>
+    <h2 class="section-title">Pourquoi choisir Coin Carrière</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 4v10l6 3" stroke="#C5973A" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="14" cy="14" r="10" stroke="#C5973A" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <h3>Gain de temps massif</h3>
+        <p>Publiez en 5 min. Recevez des candidats en 48h. Concentrez-vous sur votre vrai travail — vendre de l'immobilier.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 4C8.477 4 4 8.477 4 14s4.477 10 10 10 10-4.477 10-10S19.523 4 14 4z" stroke="#C5973A" stroke-width="1.8"/>
+            <path d="M9 14l3 3 7-7" stroke="#C5973A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Profils 100% immobilier</h3>
+        <p>Chaque candidat sur la plateforme est spécialisé ou en reconversion immobilier. Fini les CV hors cible.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="4" y="6" width="20" height="16" rx="3" stroke="#C5973A" stroke-width="1.8"/>
+            <path d="M9 12h10M9 16h6" stroke="#C5973A" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Interface ultra simple</h3>
+        <p>Pas besoin d'une équipe RH. Publiez, recevez, contactez. Trois clics suffisent pour démarrer votre recrutement.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M6 18l5-5 4 4 7-9" stroke="#C5973A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 24h20" stroke="#C5973A" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Résultats mesurables</h3>
+        <p>Vues, candidatures, taux de réponse — suivez votre recrutement en temps réel et ajustez votre offre facilement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── HOW IT WORKS ───── -->
+<section class="how-section" id="comment">
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="section-tag" style="color: var(--gold);">Comment ça marche</div>
+    <h2 class="section-title">3 étapes. C'est tout.</h2>
+    <p class="section-lead">Pas de formation, pas de configuration complexe. Vous recrutez dès la première connexion.</p>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Publiez votre offre</h3>
+        <p>Décrivez le poste en quelques minutes. Notre formulaire guidé vous aide à rédiger une annonce efficace et percutante.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Recevez les candidats</h3>
+        <p>Notre algorithme contacte les profils correspondants. Vous recevez les premières candidatures dans les 48 heures.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Recrutez le bon profil</h3>
+        <p>Sélectionnez, contactez directement, fixez les entretiens. Votre futur collaborateur est à portée de clic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── TESTIMONIALS ───── -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-tag">Ils nous font confiance</div>
+    <h2 class="section-title">Ce que disent nos clients</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">En 3 jours, j'avais 8 candidatures de négociateurs expérimentés. Avant, je passais un mois sur LinkedIn sans rien de sérieux. Coin Carrière a changé ma façon de recruter.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SK</div>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div class="author-name">Samir Khaldi</div>
+            <div class="author-role">Directeur, Agence SKI Immobilier — Lyon</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">J'étais sceptique, mais j'ai recruté ma future assistante commerciale en moins d'une semaine. Le profil était exactement ce que je cherchais — connaissait le marché, motivée, disponible.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">NB</div>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div class="author-name">Nadia Boussad</div>
+            <div class="author-role">Gérante, Century21 Casablanca</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">Pour un promoteur comme nous, trouver des commerciaux en avant-vente est très difficile. Coin Carrière nous a envoyé 12 profils qualifiés en 4 jours. On a embauché 2 personnes.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RM</div>
+          <div>
+            <div class="stars">★★★★★</div>
+            <div class="author-name">Romain Mével</div>
+            <div class="author-role">DRH, Groupe Althéa Promotion — Paris</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── OFFER ───── -->
+<section class="offer-section" id="offre">
+  <div class="container">
+    <div class="offer-card">
+      <h2 class="section-title" style="margin-top: 2rem;">Commencez sans risque</h2>
+      <div class="offer-price"><sup>0</sup>€</div>
+      <div class="offer-price-label">pour votre première offre — aucune carte bancaire requise</div>
+      <ul class="offer-features">
+        <li>1 offre d'emploi publiée gratuitement</li>
+        <li>Accès illimité aux candidatures reçues</li>
+        <li>Matching automatique avec les profils adaptés</li>
+        <li>Notifications en temps réel par email</li>
+        <li>Support dédié par chat en 24h</li>
+        <li>Sans abonnement, sans engagement</li>
+      </ul>
+      <a href="#" class="btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem; display: inline-block;">Publier mon offre gratuitement →</a>
+      <p class="offer-note">Offre disponible pour toute nouvelle agence ou promoteur. Ensuite, plans flexibles à partir de 29€/mois.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───── FINAL CTA ───── -->
+<section class="final-cta-section">
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="cta-urgency">
+      <div class="pulse-dot"></div>
+      284 candidats actifs cette semaine
+    </div>
+    <h2 class="section-title">Votre prochain talent vous attend.</h2>
+    <p>Ne laissez pas un poste vacant freiner votre croissance.<br>Rejoignez les agences qui recrutent vite, bien, et sans stress.</p>
+    <a href="#offre" class="btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">Commencez maintenant — c'est gratuit</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom: 0.5rem; font-weight: 500; color: rgba(255,255,255,0.6);">
+    Coin<span style="color: var(--gold);">Carrière</span> · La plateforme recrutement de l'immobilier
+  </p>
+  <p>© 2025 Coin Carrière · <a href="#">Mentions légales</a> · <a href="#">Contact</a> · <a href="#">Politique de confidentialité</a></p>
+</footer>
+
+</body>
+</html>
